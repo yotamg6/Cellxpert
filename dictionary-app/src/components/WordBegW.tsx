@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { getNumOfWordsBeginW, getNumOfWordsEndW } from '../getApi';
+// import { getNumOfWordsBeginW, getNumOfWordsEndW } from '../getApi';
 const WordBegW = () => {
   const [result, setResult] = useState();
   const [title, setTitle] = useState();

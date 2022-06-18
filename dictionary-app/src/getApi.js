@@ -4,7 +4,10 @@ export const getNumOfWordsBeginW = async (letter) => {
   );
   console.log(data.length);
   if (data.length) {
-    return data.length;
+    return {
+      result: data.length,
+      title: `number of words that beggin with the letter ${letter}`,
+    };
   } else return 0;
 };
 
@@ -14,7 +17,10 @@ export const getNumOfWordsEndW = async (letter) => {
   );
   console.log(data.length);
   if (data.length) {
-    return data.length;
+    return {
+      result: data.length,
+      title: `number of words that end with the letter ${letter}`,
+    };
   } else return 0;
 };
 
@@ -36,6 +42,9 @@ export const getTotalNumOfLetterInDictio = (letter) => {
         return count;
       })
       .flat();
-    return wordCounts.reduce((acc, cur) => (acc += cur));
+    return {
+      result: wordCounts.reduce((acc, cur) => (acc += cur)),
+      title: `number of times the letter ${letter} appears in the dictionary`,
+    };
   }
 };
