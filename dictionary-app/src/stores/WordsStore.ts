@@ -6,6 +6,11 @@ class WordsStore {
   letter: string = '';
   title: string = '';
   errorAlert: string = '';
+  most: number = 0;
+  least: number = 0;
+  letterMost: string = '';
+  letterLeast: string = '';
+  letterResult = 0;
 
   constructor() {
     makeAutoObservable(this);
@@ -23,6 +28,10 @@ class WordsStore {
 
   numOfWordsBeginW = async () => {
     if (this.letter) {
+      this.letterMost = 'S';
+      this.letterLeast = 'X';
+      this.most = 35970;
+      this.least = 304;
       const newOptions = { ...this.options };
       newOptions.params.letterPattern = `^${this.letter}`;
       const { data } = await axios.request(newOptions);
@@ -35,6 +44,10 @@ class WordsStore {
 
   numOfWordsEndW = async () => {
     if (this.letter) {
+      this.letterMost = 'E';
+      this.letterLeast = 'Q';
+      this.most = 55257;
+      this.least = 43;
       const newOptions = { ...this.options };
       newOptions.params.letterPattern = `${this.letter}$`;
       const { data } = await axios.request(newOptions);
@@ -47,6 +60,10 @@ class WordsStore {
 
   numOfWordsRepInConjun = async () => {
     if (this.letter) {
+      this.letterMost = 'L';
+      this.letterLeast = 'Q';
+      this.most = 20390;
+      this.least = 5;
       const newOptions = { ...this.options };
       newOptions.params.letterPattern = `${this.letter}${this.letter}`;
       const { data } = await axios.request(newOptions);
@@ -60,6 +77,10 @@ class WordsStore {
 
   totalNumOfLetterInDictio = async () => {
     if (this.letter) {
+      this.letterMost = 'E';
+      this.letterLeast = 'Q';
+      this.most = 233040;
+      this.least = 5728;
       const newOptions = { ...this.options };
       newOptions.params.letterPattern = `${this.letter}`;
       const { data } = await axios.request(newOptions);
@@ -89,8 +110,10 @@ class WordsStore {
     let allowedChar = /^[a-z]+$/;
     if (value === '' || allowedChar.test(value)) {
       this.letter = value;
+      this.title = '';
     } else {
       this.errorAlert = 'only one letter charachter is allowed';
+      this.title = '';
     }
   };
 }
@@ -100,7 +123,10 @@ export const wordsStore = new WordsStore();
 ////////to do
 // - turn prevent message in Main into a toast
 // - make boxes with description for the buttons
-// - add charts to the ui
+// - add charts to the ui - each press, will place the letter in a column, next to the biggest and smallest columns (letters)
+// - toLowerCase
+// - add action in all event creators (btns)
+// - change the any where possible
 // - if time, change the conju fun to be with regex (compute repeated)
 
 // if (data.length) {

@@ -1,31 +1,31 @@
-/** @jsxImportSource @emotion/react */
 import { useContext } from 'react';
 // import { StoreContext } from '../App';
 import { observer } from 'mobx-react-lite';
 import { action } from 'mobx';
+import { Box } from '../styles';
 
 import { css } from '@emotion/react';
 
 const BtnTotalNumOfLetterInDictio = observer(
-  // ({ store: { letter, totalResult, totalNumOfLetterInDictio } }: any) => {
-  ({ onClickGetTotalInDiction }: any) => {
-    // const { totalNumOfLetterInDictio, letter } = useContext(StoreContext);
-    // console.log(store.letter);
+  ({ onClickGetTotalInDiction, letter }: any) => {
     return (
       <>
-        <button
-          onClick={action((e) => {
-            onClickGetTotalInDiction(e);
-          })}
-        >
-          Total number
-        </button>
+        <Box>
+          How many times does
+          {letter ? <p> the letter {letter} </p> : <p>a chosen letter </p>}
+          appear in the dictionary
+          <br />
+          <button
+            onClick={action((e) => {
+              onClickGetTotalInDiction(e);
+            })}
+          >
+            Get the total number
+          </button>
+        </Box>
       </>
     );
-    // };
   }
 );
 
 export default BtnTotalNumOfLetterInDictio;
-
-// the button will be placed inside a box with the full explanation of button use
