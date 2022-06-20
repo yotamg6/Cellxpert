@@ -1,5 +1,3 @@
-// import { ChartData } from 'chart.js';
-// import { Bar } from 'react-chartjs-2';
 import styled from '@emotion/styled';
 
 import {
@@ -12,6 +10,7 @@ import {
   Legend,
 } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
+import { LetterInfo } from '../interfaces';
 
 ChartJS.register(
   CategoryScale,
@@ -22,21 +21,15 @@ ChartJS.register(
   Legend
 );
 
-// let labels: string[] = [
-//   'January',
-//   'February',
-//   'March',
-//   'April',
-//   'May',
-//   'June',
-//   'July',
-// ];
-
 let labels: string[] = ['Results'];
 
+interface LetterProps {
+  letterData: LetterInfo;
+}
+
 const BarChart = ({
-  letterData: { most, least, letterMost, letterLeast, letterResult, title },
-}: any) => {
+  letterData: { most, least, letterResult, title },
+}: LetterProps) => {
   const options = {
     responsive: true,
     plugins: {

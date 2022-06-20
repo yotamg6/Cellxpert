@@ -1,19 +1,24 @@
 /** @jsxImportSource @emotion/react */
-import { useContext } from 'react';
-// import { StoreContext } from '../App';
 import { observer } from 'mobx-react-lite';
 import { action } from 'mobx';
 import { Box } from '../styles';
 
-import { css } from '@emotion/react';
+// import { css } from '@emotion/react';
+
+interface LetterProps {
+  onClickGetTotalInDiction: (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => void;
+  letter: string;
+}
 
 const BtnTotalNumOfLetterInDictio = observer(
-  ({ onClickGetTotalInDiction, letter }: any) => {
+  ({ onClickGetTotalInDiction, letter }: LetterProps) => {
     return (
       <>
         <Box>
           How many times does
-          {letter ? <p> the letter {letter} </p> : <p>a chosen letter </p>}
+          {letter ? <p> the letter {letter} </p> : <p>your chosen letter </p>}
           appear in the dictionary
           <br />
           <button

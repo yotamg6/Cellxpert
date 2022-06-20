@@ -14,6 +14,7 @@ class WordsStore {
   letterMost: string = '';
   letterLeast: string = '';
   letterResult = 0;
+  isLoading: boolean = false;
 
   constructor() {
     makeAutoObservable(this);
@@ -31,6 +32,7 @@ class WordsStore {
 
   numOfWordsBeginW = async () => {
     if (this.letter) {
+      this.isLoading = true;
       this.letterMost = 'S';
       this.letterLeast = 'X';
       this.most = 35970;
@@ -47,6 +49,7 @@ class WordsStore {
 
   numOfWordsEndW = async () => {
     if (this.letter) {
+      this.isLoading = true;
       this.letterMost = 'E';
       this.letterLeast = 'Q';
       this.most = 55257;
@@ -63,6 +66,7 @@ class WordsStore {
 
   numOfWordsRepInConjun = async () => {
     if (this.letter) {
+      this.isLoading = true;
       this.letterMost = 'L';
       this.letterLeast = 'Q';
       this.most = 20390;
@@ -79,6 +83,7 @@ class WordsStore {
 
   totalNumOfLetterInDictio = async () => {
     if (this.letter) {
+      this.isLoading = true;
       this.letterMost = 'E';
       this.letterLeast = 'Q';
       this.most = 233040;
@@ -86,7 +91,6 @@ class WordsStore {
       const newOptions = { ...this.options };
       newOptions.params.letterPattern = `${this.letter}`;
       const { data } = await axios.request(newOptions);
-
       const { total } = data.results;
       if (total) {
         this.setTotalResult(total);
@@ -95,6 +99,8 @@ class WordsStore {
   };
 
   setBeginResult = (resu: number) => {
+    this.isLoading = false;
+
     this.title = 'Letters in beginnings of words';
 
     this.titleLetter = `Number of words that begin with the letter ${this.letter} is ${resu}.`;
@@ -107,6 +113,8 @@ class WordsStore {
   };
 
   setEndResult = (resu: number) => {
+    this.isLoading = false;
+
     this.title = 'Letters in endings of words';
 
     this.titleLetter = `Number of words that end with the letter ${this.letter} is ${resu}.`;
@@ -120,7 +128,9 @@ class WordsStore {
   };
 
   setTotalResult = (resu: number) => {
-    this.title = 'Total number of letter found in the dictionary';
+    this.isLoading = false;
+
+    this.title = 'Total number of times letters found in the dictionary';
 
     this.titleLetter = `The total number of times the letter ${this.letter} appears in the dictionary is ${resu}.`;
 
@@ -132,7 +142,9 @@ class WordsStore {
   };
 
   setConjuResult = (resu: number) => {
-    this.title = 'Repeated letters';
+    this.isLoading = false;
+
+    this.title = 'Repeated letters in conjunction';
 
     this.titleLetter = `${resu} words have the letter ${this.letter} repeated in conjunction.`;
 
@@ -147,10 +159,14 @@ class WordsStore {
     target: { value },
   }: React.ChangeEvent<HTMLInputElement>) => {
     let allowedChar = /^[a-z]+$/;
-    if (value === '' || allowedChar.test(value)) {
-      this.letter = value;
+    const lowerCased = value.toLowerCase();
+    if (lowerCased === '' || allowedChar.test(lowerCased)) {
+      this.letter = lowerCased;
       this.title = '';
       this.errorAlert = '';
+      this.letterResult = 0;
+      this.most = 0;
+      this.least = 0;
     } else {
       this.errorAlert = 'only one letter charachter is allowed';
       this.title = '';
@@ -161,22 +177,4 @@ class WordsStore {
 export const wordsStore = new WordsStore();
 
 ////////to do
-// - turn prevent message in Main into a toast
-// - loader
-// - toLowerCase
-// - add action in all event creators (btns)
 // - change the any where possible
-// - if time, change the conju fun to be with regex (compute repeated)
-
-// if (data.length) {
-//   const regExLetter = new RegExp(this.letter, 'g');
-//   const wordCounts = data
-//     .map((wordObj: any) => {
-//       const { word } = wordObj;
-//       return (word.match(regExLetter) || []).length;
-//     })
-//     .flat();
-//   const resu = wordCounts.reduce(
-//     (acc: number, cur: number) => (acc += cur)
-//   );
-//   this.setTotalResult(resu);

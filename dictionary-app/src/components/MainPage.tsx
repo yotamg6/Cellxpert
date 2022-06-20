@@ -1,14 +1,21 @@
 /** @jsxImportSource @emotion/react */
 import BtnNumOfWordsEndW from './BtnNumOfWordsEndW';
 import BtnTotalNumOfLetterInDictio from './BtnTotalNumOfLetterInDictio';
-import LetterQueryForm from './LetterQueryForm';
 import { observer } from 'mobx-react-lite';
+import { useEffect, useState } from 'react';
 import BtnNumWordsWRepConju from './BtnNumWordsWRepConju';
 import BtnNumOfWordsBegW from './BtnNumOfWordsBegW';
 import styled from '@emotion/styled';
 import { FlexBox } from '../styles';
 import BarChart from './BarCharts';
 import { toast } from 'react-toastify';
+import CircularProgress from '@mui/material/CircularProgress';
+import Box from '@mui/material/Box';
+import { LetterInfo } from '../interfaces';
+
+interface LetterProps {
+  store: LetterInfo;
+}
 const MainPage = observer(
   ({
     store: {
@@ -27,17 +34,40 @@ const MainPage = observer(
       letterMost,
       letterLeast,
       letterResult,
+      isLoading,
     },
-  }: any) => {
-    const data = { most, least, letterMost, letterLeast, letterResult, title };
+  }: LetterProps) => {
+    // const data = { most, least, letterMost, letterLeast, letterResult, title };
+    const data = {
+      numOfWordsBeginW,
+      numOfWordsEndW,
+      numOfWordsRepInConjun,
+      totalNumOfLetterInDictio,
+      letter,
+      title,
+      titleLetter,
+      titleMost,
+      titleLeast,
+      errorAlert,
+      most,
+      least,
+      letterMost,
+      letterLeast,
+      letterResult,
+      isLoading,
+    };
     const Summary = styled.div`
       display: flex;
       justify-content: center;
       margin: 5px;
     `;
-    if (errorAlert) {
-      toast.error(errorAlert);
-    }
+
+    useEffect(() => {
+      if (errorAlert) {
+        toast.error(errorAlert);
+      }
+    }, [errorAlert]);
+
     return (
       <>
         <FlexBox>
@@ -60,6 +90,11 @@ const MainPage = observer(
         </FlexBox>
 
         <br />
+        {isLoading ? (
+          <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+            <CircularProgress color="secondary" size="100px" />
+          </Box>
+        ) : null}
         {letter && title ? (
           <Summary>
             <div
@@ -83,7 +118,6 @@ const MainPage = observer(
             </div>
           </Summary>
         ) : null}
-        {errorAlert ? <div>{errorAlert}</div> : null}
         <BarChart letterData={data} />
       </>
     );
