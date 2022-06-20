@@ -1,3 +1,4 @@
+/** @jsxImportSource @emotion/react */
 import BtnNumOfWordsEndW from './BtnNumOfWordsEndW';
 import BtnTotalNumOfLetterInDictio from './BtnTotalNumOfLetterInDictio';
 import LetterQueryForm from './LetterQueryForm';
@@ -7,6 +8,7 @@ import BtnNumOfWordsBegW from './BtnNumOfWordsBegW';
 import styled from '@emotion/styled';
 import { FlexBox } from '../styles';
 import BarChart from './BarCharts';
+import { toast } from 'react-toastify';
 const MainPage = observer(
   ({
     store: {
@@ -16,6 +18,9 @@ const MainPage = observer(
       totalNumOfLetterInDictio,
       letter,
       title,
+      titleLetter,
+      titleMost,
+      titleLeast,
       errorAlert,
       most,
       least,
@@ -24,10 +29,17 @@ const MainPage = observer(
       letterResult,
     },
   }: any) => {
-    const data = { most, least, letterMost, letterLeast, letterResult };
+    const data = { most, least, letterMost, letterLeast, letterResult, title };
+    const Summary = styled.div`
+      display: flex;
+      justify-content: center;
+      margin: 5px;
+    `;
+    if (errorAlert) {
+      toast.error(errorAlert);
+    }
     return (
       <>
-        {/* <LetterQueryForm onChangeSetInput={setInputLetter} inputValue={letter} /> */}
         <FlexBox>
           <BtnNumOfWordsBegW
             onClickGetNumWordsBeg={numOfWordsBeginW}
@@ -48,7 +60,29 @@ const MainPage = observer(
         </FlexBox>
 
         <br />
-        {letter && title ? <div>{title} </div> : null}
+        {letter && title ? (
+          <Summary>
+            <div
+              css={{
+                padding: '5px',
+                margin: '5px',
+                fontWeight: '700',
+                textTransform: 'capitalize',
+                backgroundColor: '#efffff',
+                width: '720px',
+                height: '100px',
+                boxSizing: 'border-box',
+                borderRadius: '70px',
+              }}
+            >
+              <div>{titleLetter} </div>
+              <br />
+              <div>{titleMost}</div>
+              <br />
+              <div>{titleLeast}</div>
+            </div>
+          </Summary>
+        ) : null}
         {errorAlert ? <div>{errorAlert}</div> : null}
         <BarChart letterData={data} />
       </>

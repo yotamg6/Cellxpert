@@ -1,3 +1,4 @@
+/** @jsxImportSource @emotion/react */
 import { observer } from 'mobx-react-lite';
 import { Box } from '../styles';
 
@@ -5,12 +6,22 @@ const BtnNumWordsWRepConju = observer(
   ({ onClickGetNunWordsInConju, letter }: any) => {
     return (
       <>
-        <Box>
+        <Box css={{ backgroundColor: '#c0ffff', border: '15px solid #f1ffff' }}>
           How many words have the{' '}
           {letter ? <p>letter {letter} </p> : <p>same letter </p>} repeated in
           conjunction
           <br />
-          <button onClick={onClickGetNunWordsInConju}>Get the number</button>
+          <button
+            css={{
+              height: '30px',
+              backgroundColor: '#3366ff',
+              color: 'white',
+              margin: '10px',
+            }}
+            onClick={onClickGetNunWordsInConju}
+          >
+            GET THE NUMBER
+          </button>
         </Box>
       </>
     );

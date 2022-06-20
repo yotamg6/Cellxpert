@@ -1,3 +1,4 @@
+/** @jsxImportSource @emotion/react */
 import { observer } from 'mobx-react-lite';
 import { useContext } from 'react';
 import { Box } from '../styles';
@@ -5,11 +6,16 @@ import { Box } from '../styles';
 const BtnNumOfWordsEndW = observer(({ onClickGetNumWordsEnd, letter }: any) => {
   return (
     <>
-      <Box>
-        How many words end with the{' '}
-        {letter ? <p>letter {letter} </p> : <p>a chosen letter </p>}
+      <Box css={{ backgroundColor: '#d3ff8f', border: '15px solid #e6ffc0' }}>
+        How many words end with
+        {letter ? <p>the letter {letter} </p> : <p>your chosen letter </p>}
         <br />
-        <button onClick={onClickGetNumWordsEnd}>Get number of words </button>
+        <button
+          css={{ height: '30px', backgroundColor: '#34ff34', margin: '10px' }}
+          onClick={onClickGetNumWordsEnd}
+        >
+          GET THE NUMBER
+        </button>
       </Box>
     </>
   );

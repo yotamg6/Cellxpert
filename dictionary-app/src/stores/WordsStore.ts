@@ -5,6 +5,9 @@ import { LetterInfo } from '../interfaces';
 class WordsStore {
   letter: string = '';
   title: string = '';
+  titleLetter: string = '';
+  titleMost: string = '';
+  titleLeast: string = '';
   errorAlert: string = '';
   most: number = 0;
   least: number = 0;
@@ -67,10 +70,9 @@ class WordsStore {
       const newOptions = { ...this.options };
       newOptions.params.letterPattern = `${this.letter}${this.letter}`;
       const { data } = await axios.request(newOptions);
-      console.log(data);
       const { total } = data.results;
       if (total) {
-        this.setTotalResult(total);
+        this.setConjuResult(total);
       } else return 0;
     } else return;
   };
@@ -93,15 +95,52 @@ class WordsStore {
   };
 
   setBeginResult = (resu: number) => {
-    this.title = `Number of words that begin with the letter ${this.letter} is ${resu}`;
+    this.title = 'Letters in beginnings of words';
+
+    this.titleLetter = `Number of words that begin with the letter ${this.letter} is ${resu}.`;
+
+    this.titleMost = `The letter that is most commonly found at the beginning of words is ${this.letterMost}.`;
+
+    this.titleLeast = `The letter that is least commonly found at the beginning of words is ${this.letterLeast}.`;
+
+    this.letterResult = resu;
   };
 
   setEndResult = (resu: number) => {
-    this.title = `Number of words that end with the letter ${this.letter} is ${resu}`;
+    this.title = 'Letters in endings of words';
+
+    this.titleLetter = `Number of words that end with the letter ${this.letter} is ${resu}.`;
+
+    this.titleMost = `the letter that is most commonly found at the end of words is ${this.letterMost}.`;
+
+    this.titleLeast = `the letter that is least commonly found at the end of words is ${this.letterLeast}.
+
+    `;
+    this.letterResult = resu;
   };
 
   setTotalResult = (resu: number) => {
-    this.title = `The total number of times the letter ${this.letter} appears in the dictionary is ${resu}`;
+    this.title = 'Total number of letter found in the dictionary';
+
+    this.titleLetter = `The total number of times the letter ${this.letter} appears in the dictionary is ${resu}.`;
+
+    this.titleMost = `The most commonly used letter is ${this.letterMost}.`;
+
+    this.titleLeast = `The least commonly used letter is ${this.letterLeast}. `;
+
+    this.letterResult = resu;
+  };
+
+  setConjuResult = (resu: number) => {
+    this.title = 'Repeated letters';
+
+    this.titleLetter = `${resu} words have the letter ${this.letter} repeated in conjunction.`;
+
+    this.titleMost = `The most frequent double-letter combination is ${this.letterMost}${this.letterMost}.`;
+
+    this.titleLeast = `The least frequent double-letter combination is ${this.letterLeast}${this.letterLeast}.`;
+
+    this.letterResult = resu;
   };
 
   setInputLetter = ({
@@ -111,6 +150,7 @@ class WordsStore {
     if (value === '' || allowedChar.test(value)) {
       this.letter = value;
       this.title = '';
+      this.errorAlert = '';
     } else {
       this.errorAlert = 'only one letter charachter is allowed';
       this.title = '';
@@ -122,8 +162,7 @@ export const wordsStore = new WordsStore();
 
 ////////to do
 // - turn prevent message in Main into a toast
-// - make boxes with description for the buttons
-// - add charts to the ui - each press, will place the letter in a column, next to the biggest and smallest columns (letters)
+// - loader
 // - toLowerCase
 // - add action in all event creators (btns)
 // - change the any where possible

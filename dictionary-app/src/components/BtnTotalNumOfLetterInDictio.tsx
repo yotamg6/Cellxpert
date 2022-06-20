@@ -1,3 +1,4 @@
+/** @jsxImportSource @emotion/react */
 import { useContext } from 'react';
 // import { StoreContext } from '../App';
 import { observer } from 'mobx-react-lite';
@@ -16,11 +17,17 @@ const BtnTotalNumOfLetterInDictio = observer(
           appear in the dictionary
           <br />
           <button
+            css={{
+              height: '30px',
+              backgroundColor: 'white',
+              color: 'black',
+              margin: '10px',
+            }}
             onClick={action((e) => {
               onClickGetTotalInDiction(e);
             })}
           >
-            Get the total number
+            GET THE TOTAL NUMBER
           </button>
         </Box>
       </>
