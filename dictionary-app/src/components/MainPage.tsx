@@ -2,7 +2,7 @@
 import BtnNumOfWordsEndW from './BtnNumOfWordsEndW';
 import BtnTotalNumOfLetterInDictio from './BtnTotalNumOfLetterInDictio';
 import { observer } from 'mobx-react-lite';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import BtnNumWordsWRepConju from './BtnNumWordsWRepConju';
 import BtnNumOfWordsBegW from './BtnNumOfWordsBegW';
 import styled from '@emotion/styled';
