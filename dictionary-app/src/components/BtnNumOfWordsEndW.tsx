@@ -3,6 +3,7 @@ import { observer } from 'mobx-react-lite';
 import { action } from 'mobx';
 import { Box } from '../styles';
 
+
 interface LetterProps {
   onClickGetNumWordsEnd: (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
@@ -19,7 +20,11 @@ const BtnNumOfWordsEndW = observer(
           {letter ? <p>the letter {letter} </p> : <p>your chosen letter </p>}
           <br />
           <button
-            css={{ height: '30px', backgroundColor: '#34ff34', margin: '10px' }}
+            css={{
+              height: '30px',
+              backgroundColor: '#34ff34',
+              margin: '10px',
+            }}
             onClick={action((e) => {
               onClickGetNumWordsEnd(e);
             })}

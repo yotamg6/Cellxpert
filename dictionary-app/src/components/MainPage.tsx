@@ -37,7 +37,6 @@ const MainPage = observer(
       isLoading,
     },
   }: LetterProps) => {
-    // const data = { most, least, letterMost, letterLeast, letterResult, title };
     const data = {
       numOfWordsBeginW,
       numOfWordsEndW,
@@ -80,7 +79,7 @@ const MainPage = observer(
             letter={letter}
           />
           <BtnNumWordsWRepConju
-            onClickGetNunWordsInConju={numOfWordsRepInConjun}
+            onClickGetNumWordsInConju={numOfWordsRepInConjun}
             letter={letter}
           />
           <BtnTotalNumOfLetterInDictio

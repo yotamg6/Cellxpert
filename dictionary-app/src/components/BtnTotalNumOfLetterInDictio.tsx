@@ -3,8 +3,6 @@ import { observer } from 'mobx-react-lite';
 import { action } from 'mobx';
 import { Box } from '../styles';
 
-// import { css } from '@emotion/react';
-
 interface LetterProps {
   onClickGetTotalInDiction: (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>

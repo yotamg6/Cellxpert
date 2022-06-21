@@ -4,14 +4,14 @@ import { Box } from '../styles';
 import { action } from 'mobx';
 
 interface LetterProps {
-  onClickGetNunWordsInConju: (
+  onClickGetNumWordsInConju: (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => void;
   letter: string;
 }
 
 const BtnNumWordsWRepConju = observer(
-  ({ onClickGetNunWordsInConju, letter }: LetterProps) => {
+  ({ onClickGetNumWordsInConju, letter }: LetterProps) => {
     return (
       <>
         <Box css={{ backgroundColor: '#c0ffff', border: '15px solid #f1ffff' }}>
@@ -27,7 +27,7 @@ const BtnNumWordsWRepConju = observer(
               margin: '10px',
             }}
             onClick={action((e) => {
-              onClickGetNunWordsInConju(e);
+              onClickGetNumWordsInConju(e);
             })}
           >
             GET THE NUMBER
@@ -35,7 +35,6 @@ const BtnNumWordsWRepConju = observer(
         </Box>
       </>
     );
-    // };
   }
 );
 

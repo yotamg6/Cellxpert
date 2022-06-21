@@ -19,7 +19,11 @@ const BtnNumOfWordsBegW = observer(
           {letter ? <p> the letter {letter} </p> : <p>your chosen letter </p>}
           <br />
           <button
-            css={{ height: '30px', backgroundColor: '#f0aec8', margin: '10px' }}
+            css={{
+              height: '30px',
+              backgroundColor: '#f0aec8',
+              margin: '10px',
+            }}
             onClick={action((e) => {
               onClickGetNumWordsBeg(e);
             })}

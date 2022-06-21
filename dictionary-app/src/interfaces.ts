@@ -1,3 +1,14 @@
+export interface Response {
+  query?: {
+    limit: number;
+    page: number;
+  };
+  results?: {
+    total: number;
+    data: string[];
+  };
+}
+
 export interface LetterInfo {
   letter: string;
   title: string;

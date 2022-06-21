@@ -1,6 +1,6 @@
 import { makeAutoObservable } from 'mobx';
 import axios from 'axios';
-import { LetterInfo } from '../interfaces';
+import { Response } from '../interfaces';
 
 class WordsStore {
   letter: string = '';
@@ -39,11 +39,11 @@ class WordsStore {
       this.least = 304;
       const newOptions = { ...this.options };
       newOptions.params.letterPattern = `^${this.letter}`;
-      const { data } = await axios.request(newOptions);
-      const { total } = data.results;
-      if (total) {
+      const { data } = await axios.request<Response>(newOptions);
+      if (data.results) {
+        const { total } = data.results;
         this.setBeginResult(total);
-      } else return 0;
+      } else return;
     } else return;
   };
 
@@ -56,11 +56,11 @@ class WordsStore {
       this.least = 43;
       const newOptions = { ...this.options };
       newOptions.params.letterPattern = `${this.letter}$`;
-      const { data } = await axios.request(newOptions);
-      const { total } = data.results;
-      if (total) {
+      const { data } = await axios.request<Response>(newOptions);
+      if (data.results) {
+        const { total } = data.results;
         this.setEndResult(total);
-      } else return 0;
+      } else return;
     } else return;
   };
 
@@ -73,11 +73,11 @@ class WordsStore {
       this.least = 5;
       const newOptions = { ...this.options };
       newOptions.params.letterPattern = `${this.letter}${this.letter}`;
-      const { data } = await axios.request(newOptions);
-      const { total } = data.results;
-      if (total) {
+      const { data } = await axios.request<Response>(newOptions);
+      if (data.results) {
+        const { total } = data.results;
         this.setConjuResult(total);
-      } else return 0;
+      } else return;
     } else return;
   };
 
@@ -90,11 +90,11 @@ class WordsStore {
       this.least = 5728;
       const newOptions = { ...this.options };
       newOptions.params.letterPattern = `${this.letter}`;
-      const { data } = await axios.request(newOptions);
-      const { total } = data.results;
-      if (total) {
+      const { data } = await axios.request<Response>(newOptions);
+      if (data.results) {
+        const { total } = data.results;
         this.setTotalResult(total);
-      } else return 0;
+      } else return;
     } else return;
   };
 
@@ -175,6 +175,3 @@ class WordsStore {
 }
 
 export const wordsStore = new WordsStore();
-
-////////to do
-// - change the any where possible
